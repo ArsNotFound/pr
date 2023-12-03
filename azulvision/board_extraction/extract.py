@@ -95,6 +95,8 @@ def scale_approx(approx, orig_size):
 
 @torch.no_grad()
 def extract_board(image: np.ndarray, orig: np.ndarray, model, threshold: float = 0.5, device="cpu"):
+    model.eval()
+    
     image = image.transpose(2, 0, 1).astype(np.float32)
     image_batch = torch.from_numpy(image).to(device).unsqueeze(0)
 
