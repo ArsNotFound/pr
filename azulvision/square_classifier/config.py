@@ -13,7 +13,7 @@ CLASS_DIRS = pd.Series(class_dict["folder"].values, index=class_dict["name"]).to
 LABEL_ENCODER = LabelEncoder()
 LABEL_ENCODER.fit(np.array(list(sorted(CLASS_NAMES))))
 
-MODEL_WEIGHTS = SC_DATA_DIR / "best_model.pth"
+MODEL_WEIGHTS = SC_DATA_DIR / "best_model_sc.pth"
 
 NUM_CHANNELS = 3
 NUM_CLASSES = len(CLASS_NAMES)

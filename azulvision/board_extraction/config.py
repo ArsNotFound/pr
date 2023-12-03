@@ -13,7 +13,7 @@ Y_VALID_DIR = BE_DATA_DIR / "valid" / "masks"
 X_TEST_DIR = BE_DATA_DIR / "test" / "imgs"
 Y_TEST_DIR = BE_DATA_DIR / "test" / "masks"
 
-MODEL_WEIGHTS = BE_DATA_DIR / "best_model.pth"
+MODEL_WEIGHTS = BE_DATA_DIR / "best_model_be.pth"
 
 class_dict = pd.read_csv(BE_DATA_DIR / "label_class_dict.csv")
 CLASS_NAMES = class_dict["name"].tolist()
