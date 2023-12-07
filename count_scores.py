@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 
+import cv2
 import torch
 
 from azulvision.board import Board
@@ -20,11 +21,14 @@ def main():
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    _, _, raw_b1 = classify_raw(input_files[0], be_model, sc_model, flip=True, threshold=0.5, device=device)
-    _, _, raw_b2 = classify_raw(input_files[1], be_model, sc_model, flip=True, threshold=0.5, device=device)
+    board_img1, _, raw_b1 = classify_raw(input_files[0], be_model, sc_model, flip=True, threshold=0.5, device=device)
+    board_img2, _, raw_b2 = classify_raw(input_files[1], be_model, sc_model, flip=True, threshold=0.5, device=device)
 
     board1 = Board.from_classifier(raw_b1)
     board2 = Board.from_classifier(raw_b2)
+
+    board_img1 = cv2.cvtColor(board_img1, cv2.COLOR_RGB2BGR)
+    board_img2 = cv2.cvtColor(board_img2, cv2.COLOR_RGB2BGR)
 
     print("Board 1:")
     print(board1)
@@ -35,6 +39,10 @@ def main():
 
     print(f"\nScore: {score}")
     print(f"Ended: {ended}")
+
+    cv2.imshow("Board 1", board_img1)
+    cv2.imshow("Board 2", board_img2)
+    cv2.waitKey(0)
 
 
 if __name__ == '__main__':
